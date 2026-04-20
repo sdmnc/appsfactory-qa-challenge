@@ -1,0 +1,41 @@
+# dependencies
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# local env files
+.env*
+!.env.example
+
+# build output
+dist/
+build/
+tmp/
+temp/
+coverage/
+.allure-results/
+
+# OSX
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.swp
+
+# WebdriverIO artifacts
+allure-report/
+.errorShots/
+.wdio/
+
+# Logs
+logs/
+*.log
+
+# reports
+reports/
