@@ -1,0 +1,39 @@
+name: Amazon Automation Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    # Чтобы убрать предупреждение о Node.js 20 в логах
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    defaults:
+      run:
+        working-directory: ./challenge-1-web
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24 # Обновили до актуальной 24 версии
+          cache: 'npm'
+          # КРИТИЧНО: указываем точный путь к файлу для кэширования
+          cache-dependency-path: challenge-1-web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run WDIO tests
+        run: npm test
+        env:
+          NODE_ENV: test
