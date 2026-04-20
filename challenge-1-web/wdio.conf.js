@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 export const config = {
     runner: 'local',
     specs: ['./features/**/*.feature'],
@@ -47,7 +48,16 @@ export const config = {
     },
     afterStep: async function (step, scenario, result) {
         if (!result.passed) {
-            await browser.saveScreenshot(`./screenshots/${scenario.name.replace(/\s/g, '_')}.png`);
+            const dir = './screenshots';
+
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+            const fileName = scenario.name.replace(/\s/g, '_');
+            await browser.saveScreenshot(`${dir}/${fileName}.png`);
+
+
+            console.log(`Screenshot saved: ${dir}/${fileName}.png`);
         }
     },
 };
