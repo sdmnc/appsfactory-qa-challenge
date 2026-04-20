@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    # Чтобы убрать предупреждение о Node.js 20 в логах
+
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -25,9 +25,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # Обновили до актуальной 24 версии
+          node-version: 24
           cache: 'npm'
-          # КРИТИЧНО: указываем точный путь к файлу для кэширования
+   
           cache-dependency-path: challenge-1-web/package-lock.json
 
       - name: Install dependencies
