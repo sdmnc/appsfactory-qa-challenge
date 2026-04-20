@@ -37,3 +37,11 @@ jobs:
         run: npm test
         env:
           NODE_ENV: test
+          
+          - name: Upload screenshots on failure
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: test-screenshots
+        path: challenge-1-web/screenshots/
+        retention-days: 7
