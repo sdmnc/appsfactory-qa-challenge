@@ -6,7 +6,7 @@ export const config = {
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                //'--headless=new',
+                '--headless=new',
                 '--window-size=1920,1080',
                 '--disable-blink-features=AutomationControlled',
                 '--disable-infobars',
