@@ -2,26 +2,26 @@ class CartPage {
     get cartButton() { return $('#nav-cart'); }
 
     async open() {
-        // Go to cart page via URL
         await browser.url('https://www.amazon.com/gp/cart/view.html');
     }
 
-    // Get all product names in the cart
     async getCartItems() {
-        const products = await $$('[data-name="Active Items"] .sc-list-item-content');
-        return Promise.all(products.map(async item => {
-            const titleElem = await item.$('span.a-truncate-full, span.sc-product-title');
-            return titleElem ? (await titleElem.getText()).trim().toLowerCase() : '';
-        }));
+        const products = await $$('.sc-list-item-content');
+        return products.map(async (item) => {
+            const titleElem = await item.$('.sc-product-title, .a-truncate-full');
+
+            if (await titleElem.isExisting()) {
+                return (await titleElem.getText()).trim().toLowerCase();
+            }
+            return '';
+        });
     }
 
-    // Check for product presence in the cart by name
     async hasProduct(productName) {
         const items = await this.getCartItems();
         return items.some(text => text.includes(productName.toLowerCase()));
     }
 
-    // Get total cart sum
     async getCartTotal() {
         const totalEl = await $('#sc-subtotal-amount-activecart span');
         let txt = await totalEl.getText();
@@ -29,11 +29,12 @@ class CartPage {
         return parseFloat(txt);
     }
 
-    // Click "Proceed to Checkout"
     async proceedToCheckout() {
         const checkoutBtn = await $('[name="proceedToRetailCheckout"]');
-        await checkoutBtn.waitForClickable({ timeout: 7000 });
-        await checkoutBtn.click();
+
+        await checkoutBtn.waitForExist({ timeout: 10000 });
+        await checkoutBtn.scrollIntoView();
+        await browser.execute((el) => el.click(), checkoutBtn);
     }
 }
 

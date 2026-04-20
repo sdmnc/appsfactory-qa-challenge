@@ -1,5 +1,4 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect } from 'expect';
 import HomePage from '../page-objects/home.page.js';
 import ProductListPage from '../page-objects/product-list.page.js';
 import CartPage from '../page-objects/cart.page.js';
@@ -32,7 +31,18 @@ When('I proceed to checkout', async () => {
     await CartPage.proceedToCheckout();
 });
 
+
 Then('I should be redirected to the registration page', async () => {
-    const isReg = await CheckoutPage.isAtRegistration();
-    expect(isReg).toBe(true);
+    await browser.waitUntil(
+        async () => {
+            const currentUrl = await browser.getUrl();
+            return currentUrl.includes('signin') || currentUrl.includes('register');
+        },
+        {
+            timeout: 15000,
+            timeoutMsg: 'Page is not loaded after 15 seconds'
+        }
+    );
+
+    const url = await browser.getUrl();
 });

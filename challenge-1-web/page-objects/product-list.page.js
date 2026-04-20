@@ -2,7 +2,6 @@ class ProductListPage {
     get sortDropdown() { return $('#s-result-sort-select'); }
 
     async sortByPriceLowToHigh() {
-        console.log('⏳ Sorting by price...');
         await this.sortDropdown.waitForExist({ timeout: 10000 });
         await this.sortDropdown.selectByVisibleText('Price: Low to High');
 

@@ -1,7 +1,7 @@
 # dependencies
 node_modules/
 npm-debug.log*
-# package-lock.json — УДАЛЕНО, этот файл ДОЛЖЕН быть в git
+# package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
