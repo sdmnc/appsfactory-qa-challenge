@@ -1,7 +1,7 @@
 # dependencies
 node_modules/
 npm-debug.log*
-package-lock.json
+# package-lock.json — УДАЛЕНО, этот файл ДОЛЖЕН быть в git
 yarn.lock
 pnpm-lock.yaml
 
@@ -17,10 +17,8 @@ temp/
 coverage/
 .allure-results/
 
-# OSX
+# System files
 .DS_Store
-
-# Windows
 Thumbs.db
 
 # IDE / Editor folders
@@ -32,6 +30,7 @@ Thumbs.db
 allure-report/
 .errorShots/
 .wdio/
+allure-results/
 
 # Logs
 logs/
