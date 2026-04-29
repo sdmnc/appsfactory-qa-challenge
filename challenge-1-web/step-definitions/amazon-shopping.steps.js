@@ -36,7 +36,8 @@ Then('I should be redirected to the registration page', async () => {
     await browser.waitUntil(
         async () => {
             const currentUrl = await browser.getUrl();
-            return currentUrl.includes('signin') || currentUrl.includes('register');
+            expect(currentUrl).toMatch(/signin|register/);
+            return true;
         },
         {
             timeout: 15000,

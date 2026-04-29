@@ -45,7 +45,7 @@ This project automates the following flow:
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/sdmnc/appsfactory-qa-challenge.git
+git clone https://github.com/sdmnc/appsfactory-qa-challenge.gitc
 cd challenge-1-web
 npm install
 ```
